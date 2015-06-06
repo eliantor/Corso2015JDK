@@ -1,12 +1,15 @@
 package me.aktor.quicknote;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Andrea Tortorella on 6/6/15.
@@ -14,6 +17,8 @@ import android.widget.TextView;
 public class HelloWorldActivity extends Activity {
 
     private final static String CURRENT_TEXT = "CURRENT_TEXT";
+
+    private static final int REQUEST_TO_UPPERCASE = 2;
 
     private TextView mTextView;
     private EditText mInput;
@@ -26,7 +31,8 @@ public class HelloWorldActivity extends Activity {
             int id = v.getId();
             switch (id){
                 case R.id.btn_gen:
-                    updateText();
+                    startResultActivity();
+                    //updateText();
                     break;
             }
         }
@@ -39,13 +45,21 @@ public class HelloWorldActivity extends Activity {
         View view = findViewById(R.id.tv_hello);
         mTextView = (TextView)view;
         mInput = (EditText)findViewById(R.id.in_text);
+
         findViewById(R.id.btn_gen).setOnClickListener(listener);
 
         if (savedInstanceState != null) {
+            Log.d("TAG","Saved state");
             String text = savedInstanceState.getString(CURRENT_TEXT);
-
             updateText(text);
         }
+    }
+
+    private void startResultActivity(){
+        Editable text =mInput.getText();
+        Intent intent = new Intent(this,ResultShowActivity.class);
+        intent.putExtra(ResultShowActivity.TEXT_PARAM,text.toString());
+        startActivityForResult(intent, REQUEST_TO_UPPERCASE);
     }
 
     private void updateText(){
@@ -65,4 +79,25 @@ public class HelloWorldActivity extends Activity {
         super.onSaveInstanceState(outState);
         outState.putString(CURRENT_TEXT,mCurrentText);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_TO_UPPERCASE) {
+            if (resultCode == RESULT_OK) {
+                String response = data.getStringExtra(ResultShowActivity.TEXT_RESULT);
+                Toast.makeText(this,"Maiuscolo: "+response,
+                        Toast.LENGTH_LONG).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
+
+
+
+
+
+
+
+
