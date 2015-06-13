@@ -7,7 +7,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name=".HelloWorldActivity">
+
+        <activity android:name=".lesson1.HelloWorldActivity">
+
+
+        </activity>
+
+        <activity android:name=".lesson1.ResultShowActivity"/>
+
+
+        <activity
+            android:name=".app.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -15,13 +26,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ResultShowActivity"/>
-
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-
-        </activity>
     </application>
 
 </manifest>

@@ -1,10 +1,12 @@
-package me.aktor.quicknote;
+package me.aktor.quicknote.lesson1;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import me.aktor.quicknote.R;
 
 /**
  * Created by Andrea Tortorella on 6/6/15.

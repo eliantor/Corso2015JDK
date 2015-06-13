@@ -1,4 +1,4 @@
-package me.aktor.quicknote;
+package me.aktor.quicknote.lesson1;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
+
+import me.aktor.quicknote.R;
+import me.aktor.quicknote.data.FakeData;
+import me.aktor.quicknote.data.Note;
 
 /**
  * Created by Andrea Tortorella on 6/6/15.
@@ -38,10 +44,13 @@ public class HelloWorldActivity extends Activity {
         }
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello);
+
         View view = findViewById(R.id.tv_hello);
         mTextView = (TextView)view;
         mInput = (EditText)findViewById(R.id.in_text);
@@ -55,10 +64,13 @@ public class HelloWorldActivity extends Activity {
         }
     }
 
+
     private void startResultActivity(){
         Editable text =mInput.getText();
         Intent intent = new Intent(this,ResultShowActivity.class);
         intent.putExtra(ResultShowActivity.TEXT_PARAM,text.toString());
+        //startActivity(intent);
+
         startActivityForResult(intent, REQUEST_TO_UPPERCASE);
     }
 
