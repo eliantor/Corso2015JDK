@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     tools:context=".MainActivity">
+    <include layout="@layout/toolbar"/>
+    <fragment
+        android:id="@+id/FragmentInsert"
+        android:name="me.aktor.quicknote.app.FragmentCreateNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_insert" />
+
+
+    <View android:layout_height="1px"
+        android:background="#000"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"/>
+    <fragment
+        android:id="@+id/FragmentList"
+        android:name="me.aktor.quicknote.app.FragmentList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_list" />
+</LinearLayout>
