@@ -72,7 +72,7 @@ public class FakeData {
         Date date = new Date();
         int l =(int)TimeUnit.DAYS.toMillis(1000);
         date.setTime(date.getTime()-sRand.nextInt(l));
-        return new Note(TITLES[i],CONTENT[i],date);
+        return new Note(TITLES[i],CONTENT[i],false);
     }
 
 

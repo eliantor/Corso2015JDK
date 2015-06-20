@@ -1,12 +1,12 @@
 package me.aktor.quicknote.app;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import me.aktor.quicknote.R;
+import me.aktor.quicknote.app.list.FragmentList;
 
 /**
  * Created by Andrea Tortorella on 6/13/15.

@@ -13,6 +13,7 @@ public class QuickNoteApp extends Application {
 
     private String mYVar;
 
+    // GENYMOTION
     @Override
     public void onCreate() {
         super.onCreate();

@@ -75,11 +75,12 @@ public class MainActivity extends AppCompatActivity {
     private void addNote(){
         String title = mIntitle.getText().toString();
         String testo = mIncontent.getText().toString();
-        Date now = new Date();
-        Note note  = new Note(title,testo,now);
+        Note note  = new Note(title,testo,false);
         mNotes.add(0,note);
         mAdapter.notifyDataSetChanged();
     }
+
+
 
 
     private static class NotesAdapter extends BaseAdapter

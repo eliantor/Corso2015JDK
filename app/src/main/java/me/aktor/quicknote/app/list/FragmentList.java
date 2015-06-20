@@ -1,9 +1,13 @@
-package me.aktor.quicknote.app;
+package me.aktor.quicknote.app.list;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import me.aktor.quicknote.R;
-import me.aktor.quicknote.data.FakeData;
+import me.aktor.quicknote.data.Contract;
 import me.aktor.quicknote.data.Note;
 
 /**
@@ -26,28 +29,62 @@ import me.aktor.quicknote.data.Note;
  */
 public class FragmentList extends Fragment {
 
-    private NotesAdapter mAdapter;
+    private NotesCursorAdapter mAdapter;
     private ListView mList;
     private List<Note> mNotes;
+
+    private final LoaderManager.LoaderCallbacks<Cursor> callbacks =
+            new LoaderManager.LoaderCallbacks<Cursor>() {
+                @Override
+                public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+                    CursorLoader loader = new CursorLoader(getActivity(),
+                            Contract.Note.CONTENT_URI,
+                            /*projection*/null,
+                            /*where*/null,
+                            /*arg where*/null,
+                            Contract.Note.TITLE+ " ASC");
+                    return loader;
+                }
+
+                @Override
+                public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+                    mAdapter.swapCursor(data);
+                }
+
+                @Override
+                public void onLoaderReset(Loader<Cursor> loader) {
+                    mAdapter.swapCursor(null);
+                }
+            };
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list,container,false);
-        mNotes = new ArrayList<>();
-        List<Note> notes = FakeData.generateMany(50);
-        mNotes.addAll(notes);
+        //mNotes = new ArrayList<>();
+//        List<Note> notes = FakeData.generateMany(50);
+//        mNotes.addAll(notes);
         mList = (ListView)v.findViewById(R.id.list);
-        mAdapter = new NotesAdapter(getActivity(),mNotes);
-        mList.setOnItemClickListener(mAdapter);
+        mAdapter = new NotesCursorAdapter(getActivity());
+        //mList.setOnItemClickListener(mAdapter);
         mList.setAdapter(mAdapter);
         return v;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getLoaderManager().initLoader(/*id*/R.id.LOAD_NOTES,/*bundle*/null,callbacks);
+    }
+
+    ///buttiamo via tutto
     public void addNote(Note note) {
         mNotes.add(0,note);
         mAdapter.notifyDataSetChanged();
     }
+
+
 
 
     private static class NotesAdapter extends BaseAdapter

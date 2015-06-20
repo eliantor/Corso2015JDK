@@ -20,7 +20,7 @@
         android:layout_width="match_parent"/>
     <fragment
         android:id="@+id/FragmentList"
-        android:name="me.aktor.quicknote.app.FragmentList"
+        android:name="me.aktor.quicknote.app.list.FragmentList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_list" />

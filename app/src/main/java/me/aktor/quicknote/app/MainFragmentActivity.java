@@ -14,17 +14,20 @@ import me.aktor.quicknote.data.Note;
  */
 public class MainFragmentActivity extends FragmentActivity implements FragmentCreateNote.OnSaveNoteListener {
 
-    private FragmentCreateNote mCreate;
-    private FragmentList mList;
+    public static final int TASK_ADD = 1;
+    //private FragmentCreateNote mCreate;
+    //private FragmentList mList;
+    private AddNoteTask mTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fragments);
 
-        FragmentManager fm = getSupportFragmentManager();
-        mCreate =(FragmentCreateNote) fm.findFragmentById(R.id.FragmentInsert);
-        mList = (FragmentList)fm.findFragmentById(R.id.FragmentList);
+        mTask = AddNoteTask.newInstance(this);
+        //FragmentManager fm = getSupportFragmentManager();
+        //mCreate =(FragmentCreateNote) fm.findFragmentById(R.id.FragmentInsert);
+        //mList = (FragmentList)fm.findFragmentById(R.id.FragmentList);
 
     }
 
@@ -38,7 +41,9 @@ public class MainFragmentActivity extends FragmentActivity implements FragmentCr
     }
 
     public void addNote(Note note){
-        mList.addNote(note);
+        //mList.addNote(note);
+        // todo add to database
+        mTask.addNote(TASK_ADD,note);
     }
 
     @Override

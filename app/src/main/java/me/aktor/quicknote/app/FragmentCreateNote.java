@@ -60,8 +60,7 @@ public class FragmentCreateNote extends Fragment{
     private Note createNote(){
         String title=mIntitle.getText().toString();
         String content=mIncontent.getText().toString();
-        Date date = new Date();
-        Note note = new Note(title,content,date);
+        Note note = new Note(title,content,false);
         return  note;
     }
 }
