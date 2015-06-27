@@ -16,14 +16,21 @@ import me.aktor.quicknote.data.Note;
 public class AddNoteTask extends AsyncQueryHandler {
     private static final String TAG = "AddNoteTask";
 
-    public static AddNoteTask newInstance(Context context){
-        Context app = context.getApplicationContext();
-        ContentResolver cr = app.getContentResolver();
-        return new AddNoteTask(cr);
+    public interface OnWorkStatusChangedListener {
+        public void onChangeState(String state);
     }
 
-    private AddNoteTask(ContentResolver cr) {
+    private OnWorkStatusChangedListener listener;
+
+    public static AddNoteTask newInstance(Context context,OnWorkStatusChangedListener listener){
+        Context app = context.getApplicationContext();
+        ContentResolver cr = app.getContentResolver();
+        return new AddNoteTask(cr,listener);
+    }
+
+    private AddNoteTask(ContentResolver cr,OnWorkStatusChangedListener listener) {
         super(cr);
+        this.listener = listener;
     }
 
 
@@ -34,11 +41,13 @@ public class AddNoteTask extends AsyncQueryHandler {
         values.put(Contract.Note.DATE,note.getDate());
         values.put(Contract.Note.FAVOURITE,note.favourite);
         startInsert(taskId, null, Contract.Note.CONTENT_URI,values);
+        listener.onChangeState("Starting work");
     }
 
     @Override
     protected void onInsertComplete(int token, Object cookie, Uri uri) {
         super.onInsertComplete(token, cookie, uri);
         Log.d(TAG,"Inserted: "+uri);
+        listener.onChangeState("Work done");
     }
 }

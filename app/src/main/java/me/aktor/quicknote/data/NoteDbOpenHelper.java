@@ -6,14 +6,26 @@ import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQuery;
+import android.os.Build;
+import android.os.Environment;
+
+import java.io.File;
+
+import me.aktor.quicknote.BuildConfig;
 
 /**
  * Created by Andrea Tortorella on 6/20/15.
  */
 class NoteDbOpenHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "quick_note.db";
+    private static final String DB_NAME =
+//            BuildConfig.DEBUG
+//                    ? new File(Environment.getExternalStorageDirectory(),"db_file.db").getAbsolutePath()
+//                    :
+            "quick_note.db";
+
     private static final int DB_VERSION = 3;
+
 
     public static final SQLiteDatabase.CursorFactory FACTORY =
             new SQLiteDatabase.CursorFactory() {
@@ -25,6 +37,8 @@ class NoteDbOpenHelper extends SQLiteOpenHelper {
                     return null;
                 }
             };
+
+
 
     public NoteDbOpenHelper(Context context) {
         super(context,

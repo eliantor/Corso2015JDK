@@ -1,8 +1,12 @@
 package me.aktor.quicknote.app;
 
 import android.app.Application;
+import android.util.Log;
+
+import org.json.JSONObject;
 
 import me.aktor.quicknote.R;
+import me.aktor.quicknote.app.services.network.WebServices;
 
 /**
  * Created by Andrea Tortorella on 6/13/15.

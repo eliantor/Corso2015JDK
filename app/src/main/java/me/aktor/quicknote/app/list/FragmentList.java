@@ -33,6 +33,10 @@ public class FragmentList extends Fragment {
     private ListView mList;
     private List<Note> mNotes;
 
+    public interface OnShowNoteDetailsListener {
+        public void onShowDetails(long id);
+    }
+
     private final LoaderManager.LoaderCallbacks<Cursor> callbacks =
             new LoaderManager.LoaderCallbacks<Cursor>() {
                 @Override

@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     tools:context=".MainActivity">
+    <include layout="@layout/toolbar"/>
+    <fragment
+        android:id="@+id/FragmentInsert"
+        android:name="me.aktor.quicknote.app.FragmentCreateNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_insert" />
+
+
+    <View android:layout_height="1px"
+        android:background="#000"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"/>
+    <TextView
+        android:id="@+id/status"
+        android:text="Status"
+        android:textSize="18sp"
+        android:textColor="#F00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <fragment
+        android:layout_weight="1"
+        android:id="@+id/FragmentList"
+        android:name="me.aktor.quicknote.app.list.FragmentList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:layout="@layout/fragment_list" />
+    <FrameLayout
+        android:id="@+id/host"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+</LinearLayout>

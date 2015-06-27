@@ -14,7 +14,8 @@ class Dao {
                                      String select,String order){
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        Cursor cursor = db.query(Contract.Note.PATH, null, select, null, null, null, order);
+        Cursor cursor = db.query(Contract.Note.PATH, null, select,
+                null, null, null, order);
 
         return cursor;
     }
