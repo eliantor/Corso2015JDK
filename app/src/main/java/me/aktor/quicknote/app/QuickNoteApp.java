@@ -17,15 +17,25 @@ public class QuickNoteApp extends Application {
 
     private String mYVar;
 
+    private UserManagement mUser;
+
+
     // GENYMOTION
     @Override
     public void onCreate() {
         super.onCreate();
+        mUser = new UserManagement(this);
         self = this;
+
     }
 
     public static QuickNoteApp get(){
         return self;
+    }
+
+
+    public UserManagement getUserManager(){
+        return mUser;
     }
 
     public void setVar(String var){

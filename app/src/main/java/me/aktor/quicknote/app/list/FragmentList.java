@@ -43,7 +43,11 @@ public class FragmentList extends Fragment {
                 public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                     CursorLoader loader = new CursorLoader(getActivity(),
                             Contract.Note.CONTENT_URI,
-                            /*projection*/null,
+                            /*projection*/new String[]{
+                            Contract.Note._ID,
+                            Contract.Note.TITLE,
+                            Contract.Note.DATE
+                    },
                             /*where*/null,
                             /*arg where*/null,
                             Contract.Note.TITLE+ " ASC");

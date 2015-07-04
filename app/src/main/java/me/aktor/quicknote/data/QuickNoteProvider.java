@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
+import me.aktor.quicknote.app.sync.SyncService;
+
 /**
  * Created by Andrea Tortorella on 6/20/15.
  */
@@ -106,6 +108,8 @@ public class QuickNoteProvider extends ContentProvider {
                 getContext().getContentResolver()
                         .notifyChange(Contract.Note.CONTENT_URI,null);
             }
+
+            SyncService.start(getContext());
 
             return ret;
 

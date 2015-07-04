@@ -19,6 +19,8 @@ public class WorkerFragment extends Fragment implements
     public static final String TAG = "WORKER";
     AddNoteTaskAsync mTask;
 
+    LoginTask mLogin;
+
     private String mPendingState;
 
     private boolean mIsActivityPresent;
@@ -33,8 +35,10 @@ public class WorkerFragment extends Fragment implements
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mListener = (AddNoteTaskAsync.OnWorkStatusChangedListener)
-                activity;
+        if (activity instanceof AddNoteTask.OnWorkStatusChangedListener) {
+            mListener = (AddNoteTaskAsync.OnWorkStatusChangedListener)
+                    activity;
+        }
     }
 
     @Override
@@ -98,5 +102,11 @@ public class WorkerFragment extends Fragment implements
     public void onChangeState(String state) {
         dispatch(state);
         mTask = null;
+    }
+
+    public void login(String username, String password) {
+        mLogin = new LoginTask(username,password);
+        mLogin.execute();
+
     }
 }
