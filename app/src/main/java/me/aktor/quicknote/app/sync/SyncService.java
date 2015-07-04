@@ -1,6 +1,8 @@
 package me.aktor.quicknote.app.sync;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -36,12 +38,32 @@ public class SyncService extends IntentService {
         Cursor dataToSave = obtainDataToSave();
         if (shouldSaveNow(dataToSave)) {
             saveDataAndAccount(dataToSave);
+        } else  {
+            reschedule();
         }
 
     }
 
+    private void reschedule(){
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent();
+        intent.setAction(SyncBroadcastReceiver.ACTION);
+
+        PendingIntent pi =
+                PendingIntent.getBroadcast(/*context*/this,
+                            0 /*parametro riservato e non fa nulla*/
+                        , /*intent*/intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
+        alarmManager.set(AlarmManager.RTC,System.currentTimeMillis()+1000,
+                pi);
+
+
+    }
+
     private boolean shouldSaveNow(Cursor dataToSave){
-      return true;
+        // decide se salvare immediatamente;
+        return true;
     }
     private Cursor obtainDataToSave() {
         return null;

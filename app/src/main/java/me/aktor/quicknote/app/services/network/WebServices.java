@@ -26,7 +26,7 @@ import okio.ByteString;
 public class WebServices {
 
     public static final String APPCODE= "1234567890";
-    public static final String ADDRESS = "10.0.3.2";//"10.0.2.0";
+    public static final String ADDRESS = "10.0.3.2";//"10.0.2.2";
     public static final int PORT = 9000;
     private static final String APP_HEADER = "X-BAASBOX-APPCODE";
     private static final String SESSION = "X-BB-SESSION";

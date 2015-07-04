@@ -55,6 +55,12 @@
 
         <service android:name=".app.sync.SyncService"/>
 
+        <receiver android:name=".app.sync.SyncBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.quicknote.BROADCAST_SYNC"/>
+            </intent-filter>
+        </receiver>
 
         <provider
             android:authorities="me.aktor.quicknote"
